@@ -11,7 +11,6 @@ ScriptsOnlyBuild:
     - FinishScript
     - GameManager
     - NormalCubeScript
-    - Obstacle6
     - ObstacleCubeScript
     - PlayerController
     - Swipe
@@ -137,10 +136,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13368}
     - Class: 114
       Script: {instanceID: 13398}
-    - Class: 114
-      Script: {instanceID: 13410}
-    - Class: 114
-      Script: {instanceID: 14702}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -236,7 +231,7 @@ ScriptsOnlyBuild:
     className: PlayerQuitHandler
   - hash:
       serializedVersion: 2
-      Hash: 3062b0b48f355e145b843f1c40f1e531
+      Hash: e5199b8ca18b6622aba12490745f1f48
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -530,7 +525,7 @@ ScriptsOnlyBuild:
     className: CollisionDetectorForFinish
   - hash:
       serializedVersion: 2
-      Hash: ee8f3b239ebd59afbfd04f510de602cc
+      Hash: abbae4c4f251d9076a50c1e8a5dbb88e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CubeControlScript
@@ -638,7 +633,7 @@ ScriptsOnlyBuild:
     className: AnimationController
   - hash:
       serializedVersion: 2
-      Hash: 6086038c0afa9674bbc0ea6ab76881ee
+      Hash: a6f9f48e84509c9fb96cf727d56c4cdf
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerController
@@ -686,7 +681,7 @@ ScriptsOnlyBuild:
     className: TextMeshPro
   - hash:
       serializedVersion: 2
-      Hash: 67f75d79fa1e9428e4fe62daaa989ed7
+      Hash: baccbefa952aaed90f8f039dbe2e1148
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: UIManager

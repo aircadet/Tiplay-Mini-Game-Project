@@ -16,6 +16,11 @@ public class AnimationController : MonoBehaviour
         {
             animator.SetTrigger("Surf");
         }
+
+        if (GameManager.instance.playerState == GameManager.PlayerState.Finish) 
+        {
+            animator.SetTrigger("Finish");
+        }
     }
 
 

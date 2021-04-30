@@ -5,20 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] Vector3 _playerSpeed;
-    [SerializeField] float _regulationRate;
+    [SerializeField] Transform _playerModel, _stackParent;
     public DynamicJoystick dynamicJoystick;
-    Swipe swiper;
-
-    private void Start()
-    {
-        swiper = GetComponent<Swipe>();
-    }
     private void Update()
     {
-        if (FindObjectOfType<GameManager>().playerState == GameManager.PlayerState.Preparing ) 
-        {
-            if (Input.GetMouseButtonDown(0)) { FindObjectOfType<GameManager>().playerState = GameManager.PlayerState.Playing; }
-        }
+        CheckPlayerModelIsJumpHigh();
 
         if (FindObjectOfType<GameManager>().playerState == GameManager.PlayerState.Playing || FindObjectOfType<GameManager>().playerState == GameManager.PlayerState.Collecting)
         {
@@ -36,5 +27,11 @@ public class PlayerController : MonoBehaviour
         if (RegulatedPos.x < .87f) { RegulatedPos.x = .87f; }
 
         transform.position = RegulatedPos;
+    }
+
+    void CheckPlayerModelIsJumpHigh() 
+    {
+        float regulatedY = Mathf.Clamp(_playerModel.position.y, _stackParent.position.y, _stackParent.position.y + 5);
+        Vector3 regulatedPosForPlayerModel = new Vector3(_playerModel.position.x, regulatedY, _playerModel.position.z);
     }
 }

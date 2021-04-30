@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour
         float zPos = target.transform.position.z - offSet.z;
         Vector3 newPos = new Vector3(xPos, yPos, zPos);
 
-        transform.DOMove(newPos,0);
+        transform.DOMove(newPos,0.3f);
 
         if (GameManager.instance.playerState == GameManager.PlayerState.Collecting) { yPos = GameManager.instance.xFinish - 2; }
 

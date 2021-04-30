@@ -13,7 +13,7 @@ public class CollisionDetectorForFinish : MonoBehaviour
 
         if (gameObject.transform.tag == "Finish" && collision.transform.CompareTag("Collected Cube"))
         {
-            GameManager.instance.playerState = GameManager.PlayerState.Finish;
+            GameManager.instance.Finish();
         }
     }
 }

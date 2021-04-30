@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     public Text nextLevelText;
     public Slider slider;
     public Text totalDiamondCount;
+    public Text extraCubePrice;
 
     [Header("Finish Screen Objects")]
 
@@ -30,8 +31,12 @@ public class UIManager : MonoBehaviour
     GameObject[] grounds;
     float totalMapDistance;
     Vector3 currentPlayerPos;
+
+    public static UIManager instance;
     private void Awake()
     {
+        if (instance == null) { instance = this; }
+
         // SLİDER İÇİN VERİLERİ TOPLAMA //
         grounds = GameObject.FindGameObjectsWithTag("Ground");
         foreach (GameObject go in grounds) 
@@ -50,6 +55,7 @@ public class UIManager : MonoBehaviour
         // slider işlemleri //
 
         UpdateSlider();
+        PrepareLevelUI();
 
         // DRAG TO PLAY AÇILMASI İŞLEMLERİ //
 
@@ -64,11 +70,20 @@ public class UIManager : MonoBehaviour
         if (GameManager.instance.playerState == GameManager.PlayerState.Death) { deathScreen.SetActive(true); PrepareDeathScreen(); } else { deathScreen.SetActive(false); }
     }
 
-    void PrepareLevelUI() 
+    public void PrepareLevelUI() 
     {
         currentLevelText.text = PlayerPrefs.GetInt("Level").ToString();
         nextLevelText.text = (PlayerPrefs.GetInt("Level") + 1).ToString();
         totalDiamondCount.text = PlayerPrefs.GetInt("Diamond").ToString();
+
+        try
+        {
+            extraCubePrice.text = PlayerPrefs.GetInt("ExtraCubePrice").ToString();
+        }
+        catch 
+        {
+
+        }
 
         //currentlevelImg.GetComponent<Image>().color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
         //nextLevelImg.GetComponent<Image>().color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);

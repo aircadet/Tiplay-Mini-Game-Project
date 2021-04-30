@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class CubeControlScript : MonoBehaviour
 {
-    [SerializeField] GameObject _player, _stackParent, _playerModel;
+    [SerializeField] GameObject _player, _stackParent, _playerModel, _extraCube;
     [SerializeField] float camDistanceZ, camDistanceY;
     [SerializeField] Material removedCubeMat;
 
@@ -77,7 +77,6 @@ public class CubeControlScript : MonoBehaviour
         {
             // STACK SAYISI BİTTİ //
             // ÖLDÜR //
-            Debug.Log("Stack bitti / Oyun gitti");
 
             GameManager.instance.Death();
             _playerModel.transform.SetParent(null);
@@ -85,17 +84,16 @@ public class CubeControlScript : MonoBehaviour
         }
         else 
         {
-            // DEVAMKE // 
-            Debug.Log("Üzülme! / Devamkee");
+            // DEVAM // 
         }
     }
 
     public bool CheckStackCountForFinish() 
     {
         if (_stackParent.transform.childCount <= 1)
-        {           
-            return false;
+        {                    
             GameManager.instance.Finish();
+            return false;
         }
         else
         {
@@ -111,5 +109,38 @@ public class CubeControlScript : MonoBehaviour
         {
             _stackParent.transform.GetChild(i).transform.position = _stackParent.transform.GetChild(i - 1).transform.position - new Vector3(0, .9f, 0);
         }
+    }
+
+    public void AddExtraCube()
+    {
+        // KÜP TOPLAMA MÜZİĞİ //
+
+        AudioManager._instance.PlayMusic(0);
+
+        // Animasyon //
+        //anim.SetTrigger("Jump");
+
+        GameObject cube = Instantiate(_extraCube);
+        seq = DOTween.Sequence();
+
+        seq.Append(_player.transform.DOMove(new Vector3(_player.transform.position.x, _player.transform.position.y + .9f, _player.transform.position.z), 0));
+        Vector3 lastCubePos = _stackParent.transform.GetChild(_stackParent.transform.childCount - 1).position;
+        seq.Append(cube.transform.DOMove(lastCubePos - new Vector3(0, .9f, 0), 0));
+        cube.transform.tag = "Collected Cube";
+
+        Destroy(cube.GetComponent<NormalCubeScript>());
+
+        cube.GetComponent<BoxCollider>().isTrigger = false;
+        cube.GetComponent<Rigidbody>().useGravity = true;
+        cube.transform.SetParent(_stackParent.transform);
+
+        // KAMERAYI UZAKLAŞTIR //
+        FindObjectOfType<CameraController>().offSet.z += camDistanceZ;
+        FindObjectOfType<CameraController>().yPos += camDistanceY;
+
+        // KÜP SIRALAMASINI DÜZENLE //
+
+        EditTheCubes();
+
     }
 }

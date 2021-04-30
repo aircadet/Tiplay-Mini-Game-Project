@@ -20,7 +20,7 @@ public class FinishScript : MonoBehaviour
                 GameManager.instance.xFinish++;
                 Debug.Log("X ----> " + GameManager.instance.xFinish);
 
-                // AYNI YERDE TEKRAR ÇALIŞMAMASI SCRİPTİ SILDIM //
+                // AYNI YERDE TEKRAR ÇALIŞMAMASI İÇİN SCRİPTİ SILDIM //
 
                 Destroy(gameObject.GetComponent<FinishScript>());
             }
